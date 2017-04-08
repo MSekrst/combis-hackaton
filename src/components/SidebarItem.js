@@ -15,19 +15,19 @@ const Item = styled.div`
 `
 
 const Icon = styled.img`
-  max-height: 80%;
-  max-width: 80%;
+  max-height: 75%;
+  max-width: 75%;
   margin: 0 auto;
 `
 
-const Text = styled.div`
+const Text = styled.span`
   font-weight: 300;
-  font-size: 15px;
 `
 
-const SidebarItem = ({ handler, url, name, color }) => (
-  <Item color={color}>
+const SidebarItem = ({ handler, url, name }) => (
+  <Item onClick={() => { handler(name) }}>
     <Icon src={url} alt={name} />
+    <br />
     <Text>{name}</Text>
   </Item>
 )
@@ -36,7 +36,6 @@ SidebarItem.propTypes = {
   handler: PropTypes.func.isRequired,
   url: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
 }
 
 

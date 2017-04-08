@@ -34,7 +34,7 @@ const renderItems = (handler, items) => {
   let index = 0
 
   items.forEach((item) => {
-    ret.push(<SidebarItem handler={handler} name={item.name} url={item.url} color={item.color} key={index++} />)
+    ret.push(<SidebarItem handler={handler} name={item.name} url={item.url} key={index++} />)
   })
 
   return ret
