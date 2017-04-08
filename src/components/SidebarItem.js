@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const Item = styled.div`
   height: 20%;
-  padding: 10px;
+  padding: 15px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -15,8 +15,8 @@ const Item = styled.div`
 `
 
 const Icon = styled.img`
-  max-height: 75%;
-  max-width: 75%;
+  max-height: 65%;
+  max-width: 65%;
   margin: 0 auto;
 `
 
