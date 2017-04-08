@@ -50,7 +50,7 @@ const HomeWrapper = styled(FullCover) `
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('/static/img/background.jpeg');
+  background-image: url('/static/img/background.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -77,11 +77,6 @@ const HomeWrapper = styled(FullCover) `
   }
 `
 
-const Cover = styled(FullCover) `
-  z-index: 0;
-  background: linear-gradient(351deg, rgba(252, 180, 96, 0.75) 20%, rgba(255, 154, 251, 0.75) 50%, rgba(146, 57, 255, 0.75) 90%);
-`
-
 const Action = styled.div`
   opacity: 0;
   animation: ${showButton} 0.3s ease-in-out;
@@ -101,7 +96,7 @@ const Action = styled.div`
 export default () =>
   <Layout showHeader={false} title="Tigrovi">
     <HomeWrapper>
-      <Cover />
+      <FullCover />
       <div className="titles">
         <h1>Tigrovi</h1>
         <p>
