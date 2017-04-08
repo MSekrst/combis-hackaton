@@ -14,7 +14,7 @@ function sendMessage(messageData) {
       json: messageData,
     }, (error, response) => {
       if (!error && response.statusCode === 200) {
-        console.log('All good job is done')
+        // console.log('All good job is done')
         resolve()
       } else {
         reject(error)
@@ -36,11 +36,9 @@ function callSendAPI(messageData) {
       var messageId = body.message_id;
 
       if (messageId) {
-        console.log("Successfully sent message with id %s to recipient %s",
-          messageId, recipientId);
+        // console.log("Successfully sent message with id %s to recipient %s", messageId, recipientId);
       } else {
-        console.log("Successfully called Send API for recipient %s",
-          recipientId);
+        // console.log("Successfully called Send API for recipient %s", recipientId);
       }
     } else {
       console.error("Failed calling Send API", response.statusCode, response.statusMessage, body.error);
@@ -48,10 +46,9 @@ function callSendAPI(messageData) {
   });
 }
 
-/*``
+/*
 * type of message to send back
 */
-
 function replyMessage(recipientId, messageText) {
   return new Promise((resolve, reject) => {
 
@@ -71,21 +68,24 @@ function replyMessage(recipientId, messageText) {
   })
 }
 
-function replyGeneric(recipientId, option) {
+function replyGeneric(recipientId, option = {
+                        title: 'Hotel bot',
+                        subtitle: "Pozdrav, zanima vas nešto od sljedećih stvari:"
+                      }) {
   const messageData = {
-    recipient: {
-      id: recipientId,
+    recipient : {
+      id : recipientId,
     },
-    message: {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "generic",
-          "elements": [
+    message : {
+      "attachment" : {
+        "type" : "template",
+        "payload" : {
+          "template_type" : "generic",
+          "elements" : [
             {
-              "title": option.title,
+              "title" : option.title,
               // "image_url": "https://petersfancybrownhats.com/company_image.png",
-              "subtitle": option.subtitle,
+              "subtitle" : option.subtitle,
             }
           ]
         }
@@ -95,8 +95,40 @@ function replyGeneric(recipientId, option) {
   callSendAPI(messageData)
 }
 
+function replyWithPonudaTemplate(id, data) {
+  const elements = [];
+
+  data.forEach(i => {
+    elements.push({
+      title: i.naziv,
+      image_url: i.picture,
+      subtitle: i.opis,
+      buttons: [{
+          type: "postback",
+          title: "Naruči",
+          payload: id + "*" + i.id,
+      }]
+    })
+  })
+
+  callSendAPI({
+    recipient : {
+      id : id,
+    },
+    message : {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "generic",
+          elements,
+        }
+      }
+    }
+  })
+}
 
 module.exports = {
   replyMessage,
   replyGeneric,
+  replyWithPonudaTemplate,
 }

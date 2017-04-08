@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb';
 
-const url = process.env.MONGO_URL ||
+const url = 'mongodb://172.16.216.94:27017/hackaton' ||
   'mongodb://localhost:27017/hackaton';
 
 let dbConnection;

@@ -1,8 +1,15 @@
 import express from 'express'
 import config from './../config.js'
 import bodyParser from 'body-parser'
-import { replyMessage, replyGeneric } from './facebook'
+import { replyMessage, replyGeneric, replyWithPonudaTemplate } from './facebook'
 import { Wit } from 'node-wit'
+
+import { action } from './actions'
+import { connectDb } from './mongo'
+
+import router from './routes'
+
+connectDb();
 
 const facebookConfig = {
   pageAccessToken: config.pageAccessToken,
@@ -26,7 +33,7 @@ app.use(bodyParser.json())
 app.get('/', (req, res) => {
   if (req.query['hub.mode'] === 'subscribe' &&
     req.query['hub.verify_token'] === facebookConfig.validationToken) {
-    console.log('Validating webhook')
+    // console.log('Validating webhook')
     res.status(200).send(req.query['hub.challenge'])
   } else {
     console.error('Failed validation. Make sure the validation tokens match.')
@@ -37,40 +44,46 @@ app.get('/', (req, res) => {
 /*
 * Take care of the messages
 */
-
 app.post('/', function (req, res) {
-  var data = req.body;
+  const data = req.body;
 
   // Make sure this is a page subscription
   if (data.object === 'page') {
 
     // Iterate over each entry - there may be multiple if batched
-    data.entry.forEach(function (entry) {
-      var pageID = entry.id;
-      var timeOfEvent = entry.time;
-
+    data.entry.forEach(entry => {
       // Iterate over each messaging event
-      entry.messaging.forEach(function (event) {
+      entry.messaging.forEach(event => {
+        // console.log('event', event);
+
         if (event.message) {
           receivedMessage(event);
-          if (event.message.text === 'Pomoć') {
-            replyGeneric(event.sender.id, {
-              title: 'Hotel bot',
-              subtitle: "Pozdrav, zanima vas nešto od sljedećih stvari:"
-            })
-          }
-          else {
-            WitClient.message(event.message.text, {})
-              .then((d) => {
-                replyMessage(event.sender.id, JSON.stringify(d))
+
+          const id = event.sender.id
+          const text = event.message.text || 'Pomoc'
+
+          WitClient.message(text, {})
+            .then((d) => {
+              console.log('d', d);
+              // replyMessage(id, JSON.stringify(d))
+
+              action(d.entities, (err, data) => {
+                if (err) {
+                  console.log('err', err);
+                  replyGeneric(id)
+                } else {
+                  replyWithPonudaTemplate(id, data)
+                }
               })
-              .catch(console.error);
-          }
+            }, () => {
+              replyGeneric(id);
+            })
+            .catch(console.error);
         } else {
           console.log("Webhook received unknown event: ", event);
         }
-      });
-    });
+      })
+    })
 
     // Assume all went well.
     //
@@ -81,8 +94,6 @@ app.post('/', function (req, res) {
   }
 })
 
-app.use('/api', (req, res) => res.end('/api'))
-
 function receivedMessage(event) {
   // Putting a stub for now, we'll expand it in the following steps
   console.log("Message data: ", event.message);
@@ -91,3 +102,5 @@ function receivedMessage(event) {
 app.listen(app.get('port'), () => {
   console.log('Our bot is running on port', app.get('port'))
 })
+
+app.use(router)
