@@ -15,7 +15,7 @@ injectGlobal`
     font-family: 'Open Sans', sans-serif;
   }
   
-  a{
+  a {
     color: black;
     text-decoration: none;
   }
