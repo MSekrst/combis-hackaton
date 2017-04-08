@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import styled  from 'styled-components'
 
 import Sidebar from '../../src/components/Sidebar'
-import List from '../../src/components/List'
+import List from '../../src/modules/Items/components/Items'
 
 const FullCover = styled.div`
   top: 0;
@@ -33,14 +33,12 @@ export default class Items extends PureComponent {
   componentDidMount() {
     let active = 'Pending';
 
-    // console.log('window is undefined', typeof window);
-
     if (typeof window !== undefined) {
       const hash = window.location.hash || '#Pending'
       active = hash.substr(1, hash.length - 1)
-
-      console.log('', active);
     }
+
+    this.setState({ ...this.state, active });
   }
 
   sidebarChange(active) {
