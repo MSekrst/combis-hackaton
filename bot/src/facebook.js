@@ -14,7 +14,7 @@ function sendMessage(messageData) {
       json: messageData,
     }, (error, response) => {
       if (!error && response.statusCode === 200) {
-        console.log('All good job is done')
+        // console.log('All good job is done')
         resolve()
       } else {
         reject(error)
@@ -36,11 +36,9 @@ function callSendAPI(messageData) {
       var messageId = body.message_id;
 
       if (messageId) {
-        console.log("Successfully sent message with id %s to recipient %s",
-          messageId, recipientId);
+        // console.log("Successfully sent message with id %s to recipient %s", messageId, recipientId);
       } else {
-        console.log("Successfully called Send API for recipient %s",
-          recipientId);
+        // console.log("Successfully called Send API for recipient %s", recipientId);
       }
     } else {
       console.error("Failed calling Send API", response.statusCode, response.statusMessage, body.error);
@@ -101,10 +99,6 @@ function replyWithPonudaTemplate(id, data) {
   const elements = [];
 
   data.forEach(i => {
-    const payload = 'Korisnik naručuje ' + i.id;
-
-    console.log('pl', payload);
-
     elements.push({
       title: i.naziv,
       image_url: i.picture,
@@ -112,7 +106,7 @@ function replyWithPonudaTemplate(id, data) {
       buttons: [{
           type: "postback",
           title: "Naruči",
-          payload
+          payload: id + "*" + i.id,
       }]
     })
   })

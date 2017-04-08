@@ -5,8 +5,9 @@ import { replyMessage, replyGeneric, replyWithPonudaTemplate } from './facebook'
 import { Wit } from 'node-wit'
 
 import { action } from './actions'
-
 import { connectDb } from './mongo'
+
+import router from './routes'
 
 connectDb();
 
@@ -32,7 +33,7 @@ app.use(bodyParser.json())
 app.get('/', (req, res) => {
   if (req.query['hub.mode'] === 'subscribe' &&
     req.query['hub.verify_token'] === facebookConfig.validationToken) {
-    console.log('Validating webhook')
+    // console.log('Validating webhook')
     res.status(200).send(req.query['hub.challenge'])
   } else {
     console.error('Failed validation. Make sure the validation tokens match.')
@@ -53,6 +54,8 @@ app.post('/', function (req, res) {
     data.entry.forEach(entry => {
       // Iterate over each messaging event
       entry.messaging.forEach(event => {
+        // console.log('event', event);
+
         if (event.message) {
           receivedMessage(event);
 
@@ -91,17 +94,6 @@ app.post('/', function (req, res) {
   }
 })
 
-app.get('/ponuda', (req, res) => {
-  console.log('ODG', req.params);
-
-  // replyMessage()
-
-  res.sendStatus(200);
-  res.end();
-});
-
-// app.use('/api', (req, res) => res.end('/api'))
-
 function receivedMessage(event) {
   // Putting a stub for now, we'll expand it in the following steps
   console.log("Message data: ", event.message);
@@ -110,3 +102,5 @@ function receivedMessage(event) {
 app.listen(app.get('port'), () => {
   console.log('Our bot is running on port', app.get('port'))
 })
+
+app.use(router)
