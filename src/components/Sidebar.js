@@ -2,16 +2,16 @@ import React, { PropTypes } from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
 
-import SidebarItem from './SidebarItem'
-
 const SidebarLeft = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: 200px;
+  width: 145px;
   height: 100%;
-  background-color: whitesmoke;
   display: flex;
+  border-right: 1px solid rgba(0,0,0,.1);
+  box-shadow: 0 0 5px -1px rgba(0,0,0,.3);
+  background-color: whitesmoke;
   justify-content: center;
   flex-direction: column;
   text-align: center;
@@ -29,28 +29,53 @@ const Logo = styled.img`
   margin: 0 auto;
 `
 
-const renderItems = (handler, items) => {
-  const ret = []
-  let index = 0
+const Item = styled.div`
+  height: 20%;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  border-bottom: 1px solid #d9d9d9;
+  &:hover {
+    background-color: rgba(211,211,211,0.5);
+  }
+`
 
-  items.forEach((item) => {
-    ret.push(<SidebarItem handler={handler} name={item.name} url={item.url} key={index++} />)
-  })
+const Text = styled.span`
+  font-weight: 300;
+`
 
-  return ret
-}
-
-const Sidebar = ({ handler, items }) => (
+const Sidebar = ({ handler }) => (
   <SidebarLeft>
     <LogoWrapper>
-      <Link prefetch href="/"><a href="/"><Logo src="/static/img/logo.png"/></a></Link>
+      <Link prefetch href="/"><a href="/"><Logo src="/static/img/logo.png" /></a></Link>
     </LogoWrapper>
-    { renderItems(handler, items) }
+    <Item onClick={() => { handler('Pending') }}>
+      <i className="material-icons">cached</i>
+      <br />
+      <Text>name</Text>
+    </Item>
+    <Item onClick={() => { handler('Completet') }}>
+      <i style={{ width: 25 }} className="material-icons">checked</i>
+      <br />
+      <Text>name</Text>
+    </Item>
+    <Item onClick={() => { handler('Complaint') }}>
+      <i className="material-icons">mood_bad</i>
+      <br />
+      <Text>name</Text>
+    </Item>
+    <Item onClick={() => { handler('Statistics') }}>
+      <i className="material-icons">equalizer</i>
+      <br />
+      <Text>name</Text>
+    </Item>
   </SidebarLeft>
 )
 
 Sidebar.propTypes = {
-  items: PropTypes.array.isRequired,
   handler: PropTypes.func.isRequired,
 }
 

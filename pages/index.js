@@ -8,11 +8,24 @@ const FullCover = styled.div`
   height: 100vh;
   width: 100vw;
   max-width: 100%;
+  z-index: 0;
+  background: linear-gradient(351deg, rgba(120, 96, 252, 0.75) 20%, rgba(255, 154, 251, 0.75) 50%, rgba(255, 231, 57, 0.75) 90%);
+`
+
+export const Button = styled.a`
+  background: black;
+  color: white;
+  cursor: pointer;
+  padding: 10px 25px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  font-family: 'Source Code Pro', monospace;
+  box-shadow: 0 5px 20px 0 rgba(0,0,0,.5);
 `
 
 const showTitle = keyframes`
   from {
-    transform: translateY(-90px);
+    transform: translateY(50px);
     opacity: 0.3;
   }
   to {
@@ -45,7 +58,7 @@ const HomeWrapper = styled(FullCover) `
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('/static/img/landing.jpg');
+  background-image: url('/static/img/pozadina2.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -61,12 +74,12 @@ const HomeWrapper = styled(FullCover) `
       text-align: center;
       margin-bottom: 2vh;
       animation: ${showTitle} 0.5s ease-in-out;
-    }
     & p{
       font-family: 'Source Code Pro', monospace;
       animation: ${showP} 0.3s ease-in-out;
       text-align: justify;
       margin-bottom: 30px;
+    }
     }
   }
 `
@@ -87,6 +100,11 @@ const Action = styled.div`
   }
 `
 
+const Subtitle = styled.h2`
+  text-align: center;
+  font-style: italic;
+`
+
 const ItemsWrapper = styled.div`
   display: flex;
   column-align: center;
@@ -100,45 +118,85 @@ const Row = styled.div`
 
 const Icon = styled.div`
   display: inline-block;
-  background-color: whitesmoke;
+  width: 80px;
+  height: 80px;
   padding: 20px;
   border-radius: 20px;
   opacity: 0.8;
+  & p{
+    opacity: 0.01;
+    color: black;
+    font-weight: bold;
+  }
   &:hover {
     opacity: 1;
+    & p{
+      opacity: 1;
+    }
+  }
+  & i{
+    font-size: 60px;
   }
 `
 
 const Title = styled.h1`
   font-weight: 900;
   font-size: 50px;
+  @media (max-width: 780px) {
+    font-size: 8vh;
+  }
 `
 
 export default () =>
-    <HomeWrapper>
-      <FullCover />
-      <div className="titles">
-        <Title>Welcome to Hotel Assistant</Title>
-        <br />
-        <Action>
-          <ItemsWrapper>
-            <Row>
-              <Link prefetch href="/items#Pending"><a href="/items#Pending"><Icon>
-                <img src="/static/img/pendingLogo.png" alt="Pending" width="80px" height="80px"/>
-              </Icon></a></Link>
-              <Link prefetch href="/items#Completed"><a href="/items#Completed"><Icon style={{ marginLeft: "20px" }}>
-                <img src="/static/img/completed.png" alt="Completed" width="80px" height="80px"/>
-              </Icon></a></Link>
-            </Row>
-            <Row>
-              <Link prefetch href="/items#Damages"><a href="/items#Complaint"><Icon>
-                <img src="/static/img/complainLogo.png" alt="Complaint" width="80px" height="80px"/>
-              </Icon></a></Link>
-                <Link prefetch href="/items#Statistics"><a href="/items#Statistics"><Icon style={{ marginLeft: "20px" }}>
-                <img src="/static/img/statisticsLogo.png" alt="Completed" width="80px" height="80px"/>
-                </Icon></a></Link>
-            </Row>
-          </ItemsWrapper>
-        </Action>
-      </div>
-    </HomeWrapper>
+  <HomeWrapper>
+    <FullCover />
+    <div className="titles">
+      <Subtitle> Anything you need, all the time. </Subtitle>
+      <Title> Hotel <span style={{ color: '#505BAD' }}>Assistant</span></Title>
+      <br />
+      <Action>
+        <ItemsWrapper>
+          <Row>
+            <Link
+              prefetch
+              href="/items#Pending"
+            >
+              <a href="/items#Pending">
+                <Icon>
+                  <i className="material-icons">cached</i>
+                  <p>Pending</p>
+                </Icon>
+              </a>
+            </Link>
+            <Link
+              prefetch
+              href="/items#Completed"
+            >
+              <a href="/items#Completed">
+                <Icon style={{ marginLeft: '20px' }}>
+                  <i className="material-icons">check</i>
+                  <p>Completed</p>
+                </Icon>
+              </a>
+            </Link>
+            <Link prefetch href="/items#Damages">
+              <a href="/items#Complaint">
+                <Icon>
+                  <i className="material-icons">mood_bad</i>
+                  <p>Complaint</p>
+                </Icon>
+              </a>
+            </Link>
+            <Link prefetch href="/items#Statistics">
+              <a href="/items#Statistics">
+                <Icon style={{ marginLeft: '20px' }}>
+                  <i className="material-icons">equalizer</i>
+                  <p>Statistics</p>
+                </Icon>
+              </a>
+            </Link>
+          </Row>
+        </ItemsWrapper>
+      </Action>
+    </div>
+  </HomeWrapper>

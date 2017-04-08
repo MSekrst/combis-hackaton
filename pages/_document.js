@@ -22,6 +22,7 @@ export default class MyDocument extends Document {
     return (
       <html lang="en">
         <Head>
+          =<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
           <title>Hotel Assistant</title>
           <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.png" />
         </Head>
