@@ -58,7 +58,7 @@ const HomeWrapper = styled(FullCover) `
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('/static/img/landing.jpg');
+  background-image: url('/static/img/pozadina2.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -74,12 +74,12 @@ const HomeWrapper = styled(FullCover) `
       text-align: center;
       margin-bottom: 2vh;
       animation: ${showTitle} 0.5s ease-in-out;
-    }
     & p{
       font-family: 'Source Code Pro', monospace;
       animation: ${showP} 0.3s ease-in-out;
       text-align: justify;
       margin-bottom: 30px;
+    }
     }
   }
 `
@@ -123,8 +123,16 @@ const Icon = styled.div`
   padding: 20px;
   border-radius: 20px;
   opacity: 0.8;
+  & p{
+    opacity: 0.01;
+    color: black;
+    font-weight: bold;
+  }
   &:hover {
     opacity: 1;
+    & p{
+      opacity: 1;
+    }
   }
   & i{
     font-size: 60px;
@@ -134,6 +142,9 @@ const Icon = styled.div`
 const Title = styled.h1`
   font-weight: 900;
   font-size: 50px;
+  @media (max-width: 780px) {
+    font-size: 8vh;
+  }
 `
 
 export default () =>
@@ -153,6 +164,7 @@ export default () =>
               <a href="/items#Pending">
                 <Icon>
                   <i className="material-icons">cached</i>
+                  <p>Pending</p>
                 </Icon>
               </a>
             </Link>
@@ -163,6 +175,7 @@ export default () =>
               <a href="/items#Completed">
                 <Icon style={{ marginLeft: '20px' }}>
                   <i className="material-icons">check</i>
+                  <p>Completed</p>
                 </Icon>
               </a>
             </Link>
@@ -170,6 +183,7 @@ export default () =>
               <a href="/items#Complaint">
                 <Icon>
                   <i className="material-icons">mood_bad</i>
+                  <p>Complaint</p>
                 </Icon>
               </a>
             </Link>
@@ -177,6 +191,7 @@ export default () =>
               <a href="/items#Statistics">
                 <Icon style={{ marginLeft: '20px' }}>
                   <i className="material-icons">equalizer</i>
+                  <p>Statistics</p>
                 </Icon>
               </a>
             </Link>
