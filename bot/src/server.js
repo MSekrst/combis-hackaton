@@ -1,7 +1,7 @@
 import express from 'express'
 import config from './../config.js'
 import bodyParser from 'body-parser'
-import { replyMessage } from './facebook'
+import { replyMessage, replyGeneric } from './facebook'
 import { Wit } from 'node-wit'
 
 const facebookConfig = {
@@ -9,13 +9,7 @@ const facebookConfig = {
   validationToken: config.validationToken,
 }
 
-// const WitClient = new Wit({ accessToken: '42N7ZBK3H3HJIBL7FNHI6P6N6E4V6FQR' });
-
-// WitClient.message('what is the weather in London?', {})
-//   .then((data) => {
-//     console.log('Yay, got Wit.ai response: ' + JSON.stringify(data));
-//   })
-//   .catch(console.error);
+const WitClient = new Wit({ accessToken: '42N7ZBK3H3HJIBL7FNHI6P6N6E4V6FQR' });
 
 /*
 * Creation of the server
@@ -59,7 +53,19 @@ app.post('/', function (req, res) {
       entry.messaging.forEach(function (event) {
         if (event.message) {
           receivedMessage(event);
-          replyMessage(event.sender.id, "Hello there:")
+          if (event.message.text === 'Pomoć') {
+            replyGeneric(event.sender.id, {
+              title: 'Hotel bot',
+              subtitle: "Pozdrav, zanima vas nešto od sljedećih stvari:"
+            })
+          }
+          else {
+            WitClient.message(event.message.text, {})
+              .then((d) => {
+                replyMessage(event.sender.id, JSON.stringify(d))
+              })
+              .catch(console.error);
+          }
         } else {
           console.log("Webhook received unknown event: ", event);
         }

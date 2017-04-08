@@ -1,8 +1,8 @@
 import { Wit } from 'node-wit'
 
-const WitClient = new Wit({ accessToken: '42N7ZBK3H3HJIBL7FNHI6P6N6E4V6FQR' });
-WitClient.message('what is the weather in London?', {})
+const WitClient = new Wit({ accessToken: 'SDMX2XWRAEXONNPLYMBUVZZT75CWMKCS' });
+WitClient.message('gdje je najbliži restoran?', {})
   .then((data) => {
-    console.log('Yay, got Wit.ai response: ' + JSON.stringify(data));
+    console.log(JSON.stringify(data))
   })
   .catch(console.error);

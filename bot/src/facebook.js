@@ -23,6 +23,31 @@ function sendMessage(messageData) {
   })
 }
 
+function callSendAPI(messageData) {
+  request({
+    uri: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: { access_token: config.pageAccessToken },
+    method: 'POST',
+    json: messageData
+
+  }, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      var recipientId = body.recipient_id;
+      var messageId = body.message_id;
+
+      if (messageId) {
+        console.log("Successfully sent message with id %s to recipient %s",
+          messageId, recipientId);
+      } else {
+        console.log("Successfully called Send API for recipient %s",
+          recipientId);
+      }
+    } else {
+      console.error("Failed calling Send API", response.statusCode, response.statusMessage, body.error);
+    }
+  });
+}
+
 /*``
 * type of message to send back
 */
@@ -46,33 +71,32 @@ function replyMessage(recipientId, messageText) {
   })
 }
 
-function replyButton(recipientId, option) {
+function replyGeneric(recipientId, option) {
   const messageData = {
     recipient: {
       id: recipientId,
     },
     message: {
-      attachment: {
-        type: 'template',
-        payload: {
-          template_type: 'generic',
-          elements: [{
-            title: option.elementsTitle,
-            buttons: [{
-              type: option.buttonType,
-              url: option.buttonUrl,
-              title: option.buttonTitle,
-            }],
-          }],
-        },
-      },
-    },
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [
+            {
+              "title": option.title,
+              // "image_url": "https://petersfancybrownhats.com/company_image.png",
+              "subtitle": option.subtitle,
+            }
+          ]
+        }
+      }
+    }
   }
-  sendMessage(messageData)
+  callSendAPI(messageData)
 }
 
 
 module.exports = {
   replyMessage,
-  replyButton,
+  replyGeneric,
 }

@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb';
 
 const url = process.env.MONGO_URL ||
-  'mongodb://localhost:27017/match-maker';
+  'mongodb://localhost:27017/hackaton';
 
 let dbConnection;
 
