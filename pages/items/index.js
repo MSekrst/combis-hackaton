@@ -47,7 +47,7 @@ export default class Items extends PureComponent {
 
   render() {
     return <div>
-      <Sidebar handler={this.sidebarChange} items={[{ url: '/static/img/pending.png', name: 'Pending' }, { url: '/static/img/checkmark.png', name: 'Completed' }, { url: '/static/img/complaint.png', name: 'Complaint' }, { url: '/static/img/statistics.png', name: 'Statistics' }]} />
+      <Sidebar handler={this.sidebarChange} items={[{ url: '/static/img/pendingLogo.png', name: 'Pending', color: '#123456' }, { url: '/static/img/completed.png', name: 'Completed', color: '#123456' }, { url: '/static/img/complainLogo.png', name: 'Complaint', color: '#123456' }, { url: '/static/img/statisticsLogo.png', name: 'Statistics', color: '#123456' }]} />
       <ContentWrapper>
         { this.state.active === 'Statistics' ? <div>Stats</div> : <List /> }
       </ContentWrapper>

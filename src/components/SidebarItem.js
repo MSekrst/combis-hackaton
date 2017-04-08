@@ -3,20 +3,20 @@ import styled from 'styled-components'
 
 const Item = styled.div`
   height: 20%;
-  padding: 10px;
+  padding: 15px;
   display: flex;
   justify-content: center;
   flex-direction: column;
   text-align: center;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #d9d9d9;
   &:hover {
     background-color: rgba(211,211,211,0.5);
   }
 `
 
 const Icon = styled.img`
-  max-height: 75%;
-  max-width: 75%;
+  max-height: 65%;
+  max-width: 65%;
   margin: 0 auto;
 `
 
