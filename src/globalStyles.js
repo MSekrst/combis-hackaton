@@ -4,8 +4,8 @@ import { injectGlobal } from 'styled-components'
 
 injectGlobal`
 
-  @import: url('https://fonts.googleapis.com/icon?family=PT+Sans');
-  @import: url('https://fonts.googleapis.com/css?family=PT+Sans:400,900&amp;subset=latin-ext');
+  @import url('https://fonts.googleapis.com/css?family=PT+Sans&amp;subset=latin-ext');
+  @import url('https://fonts.googleapis.com/css?family=Roboto');
 
   body, html{
     height: 100%;

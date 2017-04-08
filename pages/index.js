@@ -100,7 +100,7 @@ const Row = styled.div`
 
 const Icon = styled.div`
   display: inline-block;
-  background-color: purple;
+  background-color: whitesmoke;
   padding: 20px;
   border-radius: 20px;
   opacity: 0.8;
@@ -124,18 +124,18 @@ export default () =>
           <ItemsWrapper>
             <Row>
               <Link prefetch href="/items#Pending"><a href="/items#Pending"><Icon>
-                <img src="/static/img/pending.png" alt="Pending" width="80px" height="80px"/>
+                <img src="/static/img/pendingLogo.png" alt="Pending" width="80px" height="80px"/>
               </Icon></a></Link>
               <Link prefetch href="/items#Completed"><a href="/items#Completed"><Icon style={{ marginLeft: "20px" }}>
-                <img src="/static/img/checkmark.png" alt="Completed" width="80px" height="80px"/>
+                <img src="/static/img/completed.png" alt="Completed" width="80px" height="80px"/>
               </Icon></a></Link>
             </Row>
             <Row>
               <Link prefetch href="/items#Damages"><a href="/items#Complaint"><Icon>
-                <img src="/static/img/complaint.png" alt="Complaint" width="80px" height="80px"/>
+                <img src="/static/img/complainLogo.png" alt="Complaint" width="80px" height="80px"/>
               </Icon></a></Link>
                 <Link prefetch href="/items#Statistics"><a href="/items#Statistics"><Icon style={{ marginLeft: "20px" }}>
-                <img src="/static/img/statistics.png" alt="Completed" width="80px" height="80px"/>
+                <img src="/static/img/statisticsLogo.png" alt="Completed" width="80px" height="80px"/>
                 </Icon></a></Link>
             </Row>
           </ItemsWrapper>

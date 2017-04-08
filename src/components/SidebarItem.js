@@ -8,7 +8,7 @@ const Item = styled.div`
   justify-content: center;
   flex-direction: column;
   text-align: center;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #d9d9d9;
   &:hover {
     background-color: rgba(211,211,211,0.5);
   }
