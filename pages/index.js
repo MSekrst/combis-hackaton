@@ -1,7 +1,5 @@
 import styled, { keyframes } from 'styled-components'
 import Link from 'next/link'
-import Layout from '../src/components/Layout'
-import { Button } from '../src/modules/Heroes/Styled'
 
 const FullCover = styled.div`
   top: 0;
@@ -50,7 +48,11 @@ const HomeWrapper = styled(FullCover) `
   display: flex;
   justify-content: center;
   align-items: center;
+<<<<<<< HEAD
   background-image: url('/static/img/background.jpeg');
+=======
+  background-image: url('/static/img/background.jpg');
+>>>>>>> d4695bae2c65c5cccb415e38979ba0c9400814c3
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -99,7 +101,6 @@ const Action = styled.div`
 `
 
 export default () =>
-  <Layout showHeader={false} title="Tigrovi">
     <HomeWrapper>
       <Cover />
       <div className="titles">
@@ -121,4 +122,3 @@ export default () =>
         </Action>
       </div>
     </HomeWrapper>
-  </Layout>

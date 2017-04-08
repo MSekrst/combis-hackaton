@@ -8,7 +8,6 @@
   "dependencies": {
     "next": "^2.0.1",
     "next-redux-wrapper": "^1.0.0",
-    "rc-switch": "^1.4.3",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.3",

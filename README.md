@@ -1,6 +1,7 @@
-<h1>Next.js 2.0 Starter</h1>
+<h1>Hackaton</h1>
 
 <h3>Startup</h3>
+
 <ul>
 <li>Clone project to local computer</li>
 <li>In cloned folder run <code>npm i</code> in terminal

@@ -10,16 +10,14 @@
     "import"
   ],
   "rules": {
-    "semi": [
-      1,
-      "never"
-    ],
+    "semi": [1, "never"],
     "import/prefer-default-export": 0,
     "react/jsx-filename-extension": 0,
     "no-confusing-arrow": 0,
     "react/react-in-jsx-scope": 0,
     "no-plusplus": 0,
     "no-restricted-syntax": 1,
-    "guard-for-in": 1
+    "guard-for-in": 1,
+    "react/forbid-prop-types": 0
   }
 }
