@@ -30,13 +30,26 @@ export default class Items extends PureComponent {
     this.sidebarChange = this.sidebarChange.bind(this)
   }
 
+  componentDidMount() {
+    let active = 'Pending';
+
+    // console.log('window is undefined', typeof window);
+
+    if (typeof window !== undefined) {
+      const hash = window.location.hash || '#Pending'
+      active = hash.substr(1, hash.length - 1)
+
+      console.log('', active);
+    }
+  }
+
   sidebarChange(active) {
     this.setState({ ...this.state, active })
   }
 
   render() {
     return <div>
-      <Sidebar handler={this.sidebarChange} items={[{ url: '/static/img/pending.png', name: 'Pending', color: '#123456' }, { url: '/static/img/checkmark.png', name: 'Completed', color: '#123456' }, { url: '/static/img/complaint.png', name: 'Complaint', color: '#123456' }, { url: '/static/img/statistics.png', name: 'Statistics', color: '#123456' }]} />
+      <Sidebar handler={this.sidebarChange} items={[{ url: '/static/img/pending.png', name: 'Pending' }, { url: '/static/img/checkmark.png', name: 'Completed' }, { url: '/static/img/complaint.png', name: 'Complaint' }, { url: '/static/img/statistics.png', name: 'Statistics' }]} />
       <ContentWrapper>
         { this.state.active === 'Statistics' ? <div>Stats</div> : <List /> }
       </ContentWrapper>
