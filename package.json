@@ -1,0 +1,27 @@
+{
+  "name": "tigrovi",
+  "version": "1.0.0",
+  "description": "Next.js boilerplate",
+  "repository": "https://github.com/MSekrst/next-js-starter.git",
+  "author": "fPolic <frane.polic@fer.hr>",
+  "license": "MIT",
+  "dependencies": {
+    "next": "^2.0.1",
+    "rc-switch": "^1.4.3",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "styled-components": "^1.4.4"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3"
+  }
+}
