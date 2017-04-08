@@ -22,7 +22,7 @@ export default class Items extends PureComponent {
 
   render() {
     return <div>
-      <Sidebar handler={this.sidebarChange} items={[{ url: '/static/img/icon.png', name: 'Pending', color: '#123456' }, { url: '/static/img/icon.png', name: 'Pending', color: '#123456' }, { url: '/static/img/icon.png', name: 'Pending', color: '#123456' }, { url: '/static/img/icon.png', name: 'Pending', color: '#123456' }]} />
+      <Sidebar handler={this.sidebarChange} items={[{ url: '/static/img/pending.png', name: 'Pending', color: '#123456' }, { url: '/static/img/checkmark.png', name: 'Completed', color: '#123456' }, { url: '/static/img/complaint.png', name: 'Complaint', color: '#123456' }, { url: '/static/img/statistics.png', name: 'Statistics', color: '#123456' }]} />
       <ContentWrapper>
         CONTENT
       </ContentWrapper>

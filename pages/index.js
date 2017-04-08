@@ -52,7 +52,6 @@ const HomeWrapper = styled(FullCover) `
   background-position: center; 
   
   .titles{
-    width: 600px;
     max-width: 90%;
     z-index: 999999;
     & h1{
@@ -103,7 +102,13 @@ const Icon = styled.div`
   display: inline-block;
   background-color: purple;
   padding: 20px;
+  border-radius: 20px;
+  opacity: 0.8;
+  &:hover {
+    opacity: 1;
+  }
 `
+
 const Title = styled.h1`
   font-weight: 900;
   font-size: 50px;
@@ -113,24 +118,24 @@ export default () =>
     <HomeWrapper>
       <FullCover />
       <div className="titles">
-        <h1>Welcome to Hotel Assistant</h1>
+        <Title>Welcome to Hotel Assistant</Title>
         <br />
         <Action>
           <ItemsWrapper>
             <Row>
               <Link prefetch href="/items#Pending"><a href="/items#Pending"><Icon>
-                <img src="/static/img/checkmark.png" alt="Completed" width="80px" height="80px"/>
+                <img src="/static/img/pending.png" alt="Pending" width="80px" height="80px"/>
               </Icon></a></Link>
               <Link prefetch href="/items#Completed"><a href="/items#Completed"><Icon style={{ marginLeft: "20px" }}>
                 <img src="/static/img/checkmark.png" alt="Completed" width="80px" height="80px"/>
               </Icon></a></Link>
             </Row>
             <Row>
-              <Link prefetch href="/items#Damages"><a href="/items#Damages"><Icon>
-                <img src="/static/img/checkmark.png" alt="Completed" width="80px" height="80px"/>
+              <Link prefetch href="/items#Damages"><a href="/items#Complaint"><Icon>
+                <img src="/static/img/complaint.png" alt="Complaint" width="80px" height="80px"/>
               </Icon></a></Link>
                 <Link prefetch href="/items#Statistics"><a href="/items#Statistics"><Icon style={{ marginLeft: "20px" }}>
-                <img src="/static/img/checkmark.png" alt="Completed" width="80px" height="80px"/>
+                <img src="/static/img/statistics.png" alt="Completed" width="80px" height="80px"/>
                 </Icon></a></Link>
             </Row>
           </ItemsWrapper>

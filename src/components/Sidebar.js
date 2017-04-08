@@ -20,6 +20,7 @@ const SidebarLeft = styled.div`
 const LogoWrapper = styled.div`
   height: 20%;
   border-bottom: 1px solid black;
+  padding: 10px;
 `
 
 const Logo = styled.img`
