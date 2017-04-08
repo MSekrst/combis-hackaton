@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import styled from 'styled-components'
+import Link from 'next/link'
 
 import SidebarItem from './SidebarItem'
 
@@ -16,25 +17,41 @@ const SidebarLeft = styled.div`
   text-align: center;
 `
 
-const renderItems = (items) => {
+const LogoWrapper = styled.div`
+  height: 20%;
+  border-bottom: 1px solid #d9d9d9;
+  padding: 20px;
+`
+
+const Logo = styled.img`
+  max-height: 100%;
+  max-width: 90%;
+  margin: 0 auto;
+`
+
+const renderItems = (handler, items) => {
   const ret = []
   let index = 0
 
   items.forEach((item) => {
-    ret.push(<SidebarItem name={item.name} url={item.url} color={item.color} key={index++} />)
+    ret.push(<SidebarItem handler={handler} name={item.name} url={item.url} key={index++} />)
   })
 
   return ret
 }
 
-const Sidebar = ({ items }) => (
+const Sidebar = ({ handler, items }) => (
   <SidebarLeft>
-    { renderItems(items) }
+    <LogoWrapper>
+      <Link prefetch href="/"><a href="/"><Logo src="/static/img/logo.png"/></a></Link>
+    </LogoWrapper>
+    { renderItems(handler, items) }
   </SidebarLeft>
 )
 
 Sidebar.propTypes = {
   items: PropTypes.array.isRequired,
+  handler: PropTypes.func.isRequired,
 }
 
 export default Sidebar

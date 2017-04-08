@@ -15,7 +15,6 @@ const showTitle = keyframes`
     transform: translateY(-90px);
     opacity: 0.3;
   }
-
   to {
     transform: translateY(0);
     opacity: 1;
@@ -27,7 +26,6 @@ const showP = keyframes`
     transform: translateY(-50px);
     opacity: 0.3;
   }
-
   to {
     transform: translateY(0);
     opacity: 1;
@@ -38,7 +36,6 @@ const showButton = keyframes`
   from {
     opacity: 0.01;
   }
-
   to {
     opacity: 1;
   }
@@ -48,18 +45,13 @@ const HomeWrapper = styled(FullCover) `
   display: flex;
   justify-content: center;
   align-items: center;
-<<<<<<< HEAD
-  background-image: url('/static/img/background.jpeg');
-=======
-  background-image: url('/static/img/background.jpg');
->>>>>>> d4695bae2c65c5cccb415e38979ba0c9400814c3
+  background-image: url('/static/img/landing.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center; 
   
   .titles{
-    width: 500px;
     max-width: 90%;
     z-index: 999999;
     & h1{
@@ -79,11 +71,6 @@ const HomeWrapper = styled(FullCover) `
   }
 `
 
-const Cover = styled(FullCover) `
-  z-index: 0;
-  background: linear-gradient(351deg, rgba(252, 180, 96, 0.75) 20%, rgba(255, 154, 251, 0.75) 50%, rgba(146, 57, 255, 0.75) 90%);
-`
-
 const Action = styled.div`
   opacity: 0;
   animation: ${showButton} 0.3s ease-in-out;
@@ -100,25 +87,58 @@ const Action = styled.div`
   }
 `
 
+const ItemsWrapper = styled.div`
+  display: flex;
+  column-align: center;
+  justify-content: center;
+  flex-direction: column;
+`
+
+const Row = styled.div`
+  padding: 10px;
+`
+
+const Icon = styled.div`
+  display: inline-block;
+  background-color: whitesmoke;
+  padding: 20px;
+  border-radius: 20px;
+  opacity: 0.8;
+  &:hover {
+    opacity: 1;
+  }
+`
+
+const Title = styled.h1`
+  font-weight: 900;
+  font-size: 50px;
+`
+
 export default () =>
     <HomeWrapper>
-      <Cover />
+      <FullCover />
       <div className="titles">
-        <h1>Tigrovi</h1>
-        <p>
-          Four people are coming to make <span style={{ color: '#fffb00', fontWeight: 'bold' }}>history</span>.<br /> We are ready to solve any task that
-          comes upon us. Our web applications are blazing fast and use the hottest web technology
-          available. We utilize React with Node to make isomorphic web apps of 21st century.
-          Heard for service workers, progressive web apps, styled-components, flow... for us it
-          doesn&apos;t matter, we&apos;ve tried it all.
-        </p>
+        <Title>Welcome to Hotel Assistant</Title>
+        <br />
         <Action>
-          <Link prefetch href="/heroes">
-            <Button style={{ fontWeight: 'bold' }}>
-              Heroes
-            <span>&nbsp; -&gt;</span>
-            </Button>
-          </Link>
+          <ItemsWrapper>
+            <Row>
+              <Link prefetch href="/items#Pending"><a href="/items#Pending"><Icon>
+                <img src="/static/img/pendingLogo.png" alt="Pending" width="80px" height="80px"/>
+              </Icon></a></Link>
+              <Link prefetch href="/items#Completed"><a href="/items#Completed"><Icon style={{ marginLeft: "20px" }}>
+                <img src="/static/img/completed.png" alt="Completed" width="80px" height="80px"/>
+              </Icon></a></Link>
+            </Row>
+            <Row>
+              <Link prefetch href="/items#Damages"><a href="/items#Complaint"><Icon>
+                <img src="/static/img/complainLogo.png" alt="Complaint" width="80px" height="80px"/>
+              </Icon></a></Link>
+                <Link prefetch href="/items#Statistics"><a href="/items#Statistics"><Icon style={{ marginLeft: "20px" }}>
+                <img src="/static/img/statisticsLogo.png" alt="Completed" width="80px" height="80px"/>
+                </Icon></a></Link>
+            </Row>
+          </ItemsWrapper>
         </Action>
       </div>
     </HomeWrapper>
