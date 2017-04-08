@@ -25,7 +25,7 @@ const Text = styled.div`
   font-size: 15px;
 `
 
-const SidebarItem = ({ url, name, color }) => (
+const SidebarItem = ({ handler, url, name, color }) => (
   <Item color={color}>
     <Icon src={url} alt={name} />
     <Text>{name}</Text>
@@ -33,6 +33,7 @@ const SidebarItem = ({ url, name, color }) => (
 )
 
 SidebarItem.propTypes = {
+  handler: PropTypes.func.isRequired,
   url: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
