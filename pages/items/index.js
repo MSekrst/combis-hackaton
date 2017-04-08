@@ -30,6 +30,19 @@ export default class Items extends PureComponent {
     this.sidebarChange = this.sidebarChange.bind(this)
   }
 
+  componentDidMount() {
+    let active = 'Pending';
+
+    // console.log('window is undefined', typeof window);
+
+    if (typeof window !== undefined) {
+      const hash = window.location.hash || '#Pending'
+      active = hash.substr(1, hash.length - 1)
+
+      console.log('', active);
+    }
+  }
+
   sidebarChange(active) {
     this.setState({ ...this.state, active })
   }
