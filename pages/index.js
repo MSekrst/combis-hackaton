@@ -8,11 +8,24 @@ const FullCover = styled.div`
   height: 100vh;
   width: 100vw;
   max-width: 100%;
+  z-index: 0;
+  background: linear-gradient(351deg, rgba(120, 96, 252, 0.75) 20%, rgba(255, 154, 251, 0.75) 50%, rgba(255, 231, 57, 0.75) 90%);
+`
+
+export const Button = styled.a`
+  background: black;
+  color: white;
+  cursor: pointer;
+  padding: 10px 25px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  font-family: 'Source Code Pro', monospace;
+  box-shadow: 0 5px 20px 0 rgba(0,0,0,.5);
 `
 
 const showTitle = keyframes`
   from {
-    transform: translateY(-90px);
+    transform: translateY(50px);
     opacity: 0.3;
   }
   to {
@@ -87,6 +100,11 @@ const Action = styled.div`
   }
 `
 
+const Subtitle = styled.h2`
+  text-align: center;
+  font-style: italic;
+`
+
 const ItemsWrapper = styled.div`
   display: flex;
   column-align: center;
@@ -100,12 +118,16 @@ const Row = styled.div`
 
 const Icon = styled.div`
   display: inline-block;
-  background-color: whitesmoke;
+  width: 80px;
+  height: 80px;
   padding: 20px;
   border-radius: 20px;
   opacity: 0.8;
   &:hover {
     opacity: 1;
+  }
+  & i{
+    font-size: 60px;
   }
 `
 
@@ -115,30 +137,51 @@ const Title = styled.h1`
 `
 
 export default () =>
-    <HomeWrapper>
-      <FullCover />
-      <div className="titles">
-        <Title>Welcome to Hotel Assistant</Title>
-        <br />
-        <Action>
-          <ItemsWrapper>
-            <Row>
-              <Link prefetch href="/items#Pending"><a href="/items#Pending"><Icon>
-                <img src="/static/img/pendingLogo.png" alt="Pending" width="80px" height="80px"/>
-              </Icon></a></Link>
-              <Link prefetch href="/items#Completed"><a href="/items#Completed"><Icon style={{ marginLeft: "20px" }}>
-                <img src="/static/img/completed.png" alt="Completed" width="80px" height="80px"/>
-              </Icon></a></Link>
-            </Row>
-            <Row>
-              <Link prefetch href="/items#Damages"><a href="/items#Complaint"><Icon>
-                <img src="/static/img/complainLogo.png" alt="Complaint" width="80px" height="80px"/>
-              </Icon></a></Link>
-                <Link prefetch href="/items#Statistics"><a href="/items#Statistics"><Icon style={{ marginLeft: "20px" }}>
-                <img src="/static/img/statisticsLogo.png" alt="Completed" width="80px" height="80px"/>
-                </Icon></a></Link>
-            </Row>
-          </ItemsWrapper>
-        </Action>
-      </div>
-    </HomeWrapper>
+  <HomeWrapper>
+    <FullCover />
+    <div className="titles">
+      <Subtitle> Anything you need, all the time. </Subtitle>
+      <Title> Hotel <span style={{ color: '#505BAD' }}>Assistant</span></Title>
+      <br />
+      <Action>
+        <ItemsWrapper>
+          <Row>
+            <Link
+              prefetch
+              href="/items#Pending"
+            >
+              <a href="/items#Pending">
+                <Icon>
+                  <i className="material-icons">cached</i>
+                </Icon>
+              </a>
+            </Link>
+            <Link
+              prefetch
+              href="/items#Completed"
+            >
+              <a href="/items#Completed">
+                <Icon style={{ marginLeft: '20px' }}>
+                  <i className="material-icons">check</i>
+                </Icon>
+              </a>
+            </Link>
+            <Link prefetch href="/items#Damages">
+              <a href="/items#Complaint">
+                <Icon>
+                  <i className="material-icons">mood_bad</i>
+                </Icon>
+              </a>
+            </Link>
+            <Link prefetch href="/items#Statistics">
+              <a href="/items#Statistics">
+                <Icon style={{ marginLeft: '20px' }}>
+                  <i className="material-icons">equalizer</i>
+                </Icon>
+              </a>
+            </Link>
+          </Row>
+        </ItemsWrapper>
+      </Action>
+    </div>
+  </HomeWrapper>

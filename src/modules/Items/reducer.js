@@ -1,4 +1,5 @@
 import { GET_ITEMS } from './actions'
+
 const initialState = []
 
 export default function Items(state = initialState, action) {

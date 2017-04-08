@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import styled  from 'styled-components'
+import styled from 'styled-components'
 
 import Sidebar from '../../src/components/Sidebar'
 import List from '../../src/modules/Items/components/Items'
@@ -46,12 +46,13 @@ export default class Items extends PureComponent {
   }
 
   render() {
-    return <div>
-      <Sidebar handler={this.sidebarChange} items={[{ url: '/static/img/pendingLogo.png', name: 'Pending', color: '#123456' }, { url: '/static/img/completed.png', name: 'Completed', color: '#123456' }, { url: '/static/img/complainLogo.png', name: 'Complaint', color: '#123456' }, { url: '/static/img/statisticsLogo.png', name: 'Statistics', color: '#123456' }]} />
-      <ContentWrapper>
-        { this.state.active === 'Statistics' ? <div>Stats</div> : <List /> }
-      </ContentWrapper>
-    </div>
+    return (
+      <div>
+        <Sidebar handler={this.sidebarChange} items={[{ url: '/static/img/pendingLogo.png', name: 'Pending', color: '#123456' }, { url: '/static/img/completed.png', name: 'Completed', color: '#123456' }, { url: '/static/img/complainLogo.png', name: 'Complaint', color: '#123456' }, { url: '/static/img/statisticsLogo.png', name: 'Statistics', color: '#123456' }]} />
+        <ContentWrapper>
+          {this.state.active === 'Statistics' ? <div>Stats</div> : <List />}
+        </ContentWrapper>
+      </div>)
   }
 }
 
