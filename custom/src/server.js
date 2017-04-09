@@ -5,7 +5,8 @@ import { replyMessage, replyGeneric, replyWithPonudaTemplate } from './facebook'
 import { Wit } from 'node-wit'
 
 import { action } from './actions'
-import { connectDb } from './mongo'
+import { connectDb } from './mongo/mongo'
+import { saveItem } from './mongo/functions';
 
 import router from './routes'
 
@@ -65,7 +66,6 @@ app.post('/', function (req, res) {
 
           WitClient.message(text, {})
             .then((d) => {
-              console.log('d', d);
               // replyMessage(id, JSON.stringify(d))
 
               action(d.entities, (err, data) => {
@@ -81,7 +81,8 @@ app.post('/', function (req, res) {
             })
             .catch(console.error);
         } else if (event.postback) {
-
+          saveItem(event.postback.payload)
+          replyMessage(event.sender.id, "Narudžba zaprimljena :)")
         } else {
           console.log("Webhook received unknown event: ", event);
         }

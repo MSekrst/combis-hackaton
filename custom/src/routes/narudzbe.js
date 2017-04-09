@@ -1,6 +1,6 @@
 import express from 'express'
 
-import getDbConnection from '../mongo'
+import getDbConnection from '../mongo/mongo'
 import { ObjectID } from 'mongodb'
 
 const router = express.Router()

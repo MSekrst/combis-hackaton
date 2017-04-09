@@ -69,8 +69,8 @@ function replyMessage(recipientId, messageText) {
 }
 
 function replyGeneric(recipientId, option = {
-                        title: 'Hotel custom',
-                        subtitle: "Pozdrav, zanima vas nešto od sljedećih stvari:"
+                        title: 'Hotel Assistant',
+                        subtitle: "Pozdrav, probajte naredbe:\nponuda hrane\nponuda pića\nponuda filmova"
                       }) {
   const messageData = {
     recipient : {
@@ -111,20 +111,24 @@ function replyWithPonudaTemplate(id, data) {
     })
   })
 
-  callSendAPI({
-    recipient : {
-      id : id,
-    },
-    message : {
-      attachment: {
-        type: "template",
-        payload: {
-          template_type: "generic",
-          elements,
+  if (elements.length) {
+    callSendAPI({
+      recipient : {
+        id : id,
+      },
+      message : {
+        attachment : {
+          type : "template",
+          payload : {
+            template_type : "generic",
+            elements,
+          }
         }
       }
-    }
-  })
+    })
+  } else {
+    replyGeneric(id);
+  }
 }
 
 module.exports = {

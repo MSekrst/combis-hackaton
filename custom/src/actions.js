@@ -1,23 +1,60 @@
-import getConnection from './mongo'
+import getConnection from './mongo/mongo'
+import _ from 'lodash'
 
 const handlePonuda = (vrsta, tip, callback) => {
   const db = getConnection()
 
-  // console.log('HANDLE PONUDA', vrsta, tip);
+  console.log('HANDLE PONUDA', vrsta, tip);
 
-  db.collection('Ponuda').find({ vrsta_ponude: { "$in" : [vrsta]}, tip_ponude: { "$in" : [tip]} }).toArray((err, data) => {
-    if (err) {
-      return callback(err);
+  if (!vrsta && !tip) {
+    return callback({ message: 'No Parameters' });
+  } else {
+    if (!vrsta) {
+      db.collection('Ponuda').find({ tip_ponude: { "$in" : [tip]} }).toArray((err, data) => {
+        if (err) {
+          return callback(err);
+        }
+
+        const ret = []
+
+        data.forEach(i => {
+          ret.push({ naziv: i.naziv, opis: i.opis, picture: i.pictureUrl, id: i._id })
+        })
+
+        return callback(null, ret);
+      });
+    } else {
+      if (!tip) {
+        db.collection('Ponuda').find({ vrsta_ponude: { "$in" : [vrsta] } }).toArray((err, data) => {
+          if (err) {
+            return callback(err);
+          }
+
+          const ret = []
+
+          data.forEach(i => {
+            ret.push({ naziv: i.naziv, opis: i.opis, picture: i.pictureUrl, id: i._id })
+          })
+
+          return callback(null, ret);
+        });
+      } else {
+        db.collection('Ponuda').find({ vrsta_ponude: { "$in" : [vrsta]}, tip_ponude: { "$in" : [tip]} }).toArray((err, data) => {
+          if (err) {
+            return callback(err);
+          }
+
+          const ret = []
+
+          data.forEach(i => {
+            ret.push({ naziv: i.naziv, opis: i.opis, picture: i.pictureUrl, id: i._id })
+          })
+
+          return callback(null, ret);
+        });
+      }
     }
-
-    const ret = []
-
-    data.forEach(i => {
-      ret.push({ naziv: i.naziv, opis: i.opis, picture: i.pictureUrl, id: i._id })
-    })
-
-    return callback(null, ret);
-  });
+  }
 }
 
 export const action = (entities, callback) => {
@@ -31,10 +68,9 @@ export const action = (entities, callback) => {
 
   switch (intent) {
     case 'Ponuda':
-      if (!(entities.ponuda && entities.ponuda[0].entities && entities.ponuda[0].entities.vrsta_ponude && entities.ponuda[0].entities.vrsta_ponude[0] && entities.ponuda[0].entities.tip_ponude && entities.ponuda[0].entities.tip_ponude[0])) {
-        return callback({ message : 'Wrong format' });
-      }
-      handlePonuda(entities.ponuda[0].entities.vrsta_ponude[0].value, entities.ponuda[0].entities.tip_ponude[0].value, callback);
+
+
+      handlePonuda(_.get(entities, 'ponuda[0].entities.vrsta_ponude[0].value'), _.get(entities, 'ponuda[0].entities.tip_ponude[0].value') , callback);
       break;
     default:
       callback({ message : 'No intent handler' })
