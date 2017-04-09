@@ -80,6 +80,8 @@ app.post('/', function (req, res) {
               replyGeneric(id);
             })
             .catch(console.error);
+        } else if (event.postback) {
+
         } else {
           console.log("Webhook received unknown event: ", event);
         }
@@ -101,7 +103,7 @@ function receivedMessage(event) {
 }
 
 app.listen(app.get('port'), () => {
-  console.log('Our bot is running on port', app.get('port'))
+  console.log('Our custom is running on port', app.get('port'))
 })
 
 app.use(router)

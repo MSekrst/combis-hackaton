@@ -69,7 +69,7 @@ function replyMessage(recipientId, messageText) {
 }
 
 function replyGeneric(recipientId, option = {
-                        title: 'Hotel bot',
+                        title: 'Hotel custom',
                         subtitle: "Pozdrav, zanima vas nešto od sljedećih stvari:"
                       }) {
   const messageData = {
@@ -106,7 +106,7 @@ function replyWithPonudaTemplate(id, data) {
       buttons: [{
           type: "postback",
           title: "Naruči",
-          payload: id + "*" + i.id,
+          payload: i.id,
       }]
     })
   })
