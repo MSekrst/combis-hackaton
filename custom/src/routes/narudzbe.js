@@ -21,9 +21,9 @@ router.get('/all', (req, res) => {
 router.post('/status', (req, res) => {
   const db = getDbConnection()
 
-  db.collection('Popis_Narudzbi').updateOne({ _id: ObjectID(req.body._id) }, { $set: { status: req.body.status } })
-
-  res.status(200).end()
+  db.collection('Popis_Narudzbi').updateOne({ _id: ObjectID(req.body._id) }, { $set: { status: req.body.status } }).toArray((err, data) => {
+    res.status(200).end()
+  })
 })
 
 export default router

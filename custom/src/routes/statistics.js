@@ -11,7 +11,15 @@ router.get('/hrana', (req, res) => {
     if (err) {
       res.status(500).end();
     } else {
-      console.log('data', data)
+      const stats = []
+
+      data.forEach(item => {
+        if (stats[item._id]) {
+          stats[item._id].counter++;
+        } else {
+          stats[item._id] = { item, counter: 1 }
+        }
+      })
     }
   })
 })
