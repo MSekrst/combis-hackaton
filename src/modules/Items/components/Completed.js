@@ -10,7 +10,7 @@ export default class Completed extends PureComponent {
   render() {
     const { items } = this.props
     return (
-      <Wrapper id="Pending">
+      <Wrapper id="Completed">
         <div
           style={{
             padding: '10px 30px',

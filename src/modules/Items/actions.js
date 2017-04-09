@@ -23,9 +23,12 @@ export function removePending(_id) {
   return (dispatch) => {
     fetch('http://localhost:8080/status', {
       method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
       body: JSON.stringify({ _id, status: 'Finished' }),
     })
-    dispatch(getItems())
+      .then(() => dispatch(getItems()))
   }
 }
 

@@ -5,14 +5,14 @@ import { ObjectID } from 'mongodb'
 
 const router = express.Router()
 
-router.get('/all', (req, res) => {
+router.get('/all', (req, res) => {
   const db = getDbConnection()
 
   db.collection('Popis_Narudzbi').find().toArray((err, data) => {
     if (err) {
       res.status(500);
       res.end();
-    } else {
+    } else {
       res.json(data);
     }
   })
@@ -20,10 +20,15 @@ router.get('/all', (req, res) => {
 
 router.post('/status', (req, res) => {
   const db = getDbConnection()
+<<<<<<< HEAD
+  db.collection('Popis_Narudzbi').updateOne({ _id: ObjectID(req.body._id) }, { $set: { status: req.body.status } })
+  res.status(200).end()
+=======
 
   db.collection('Popis_Narudzbi').updateOne({ _id: ObjectID(req.body._id) }, { $set: { status: req.body.status } }).toArray((err, data) => {
     res.status(200).end()
   })
+>>>>>>> a096ddbbb28108520ac5dcd9b4acdee1912caef4
 })
 
 export default router

@@ -69,9 +69,9 @@ function replyMessage(recipientId, messageText) {
 }
 
 function replyGeneric(recipientId, option = {
-                        title: 'Hotel Assistant',
-                        subtitle: "Pozdrav, probajte naredbe:\nponuda hrane\nponuda pića\nponuda filmova"
-                      }) {
+  title: 'Hotel Assistant',
+  subtitle: "Pozdrav, probajte naredbe:\nponuda hrane\nponuda pića\nponuda filmova"
+}) {
   const messageData = {
     recipient: {
       id: recipientId,
@@ -104,9 +104,9 @@ function replyWithPonudaTemplate(id, data) {
       image_url: i.picture,
       subtitle: i.opis,
       buttons: [{
-          type: "postback",
-          title: "Naruči",
-          payload: i.id,
+        type: "postback",
+        title: "Naruči",
+        payload: i.id,
       }]
     })
   })
@@ -117,10 +117,10 @@ function replyWithPonudaTemplate(id, data) {
         id: id,
       },
       message: {
-        attachment : {
-          type : "template",
-          payload : {
-            template_type : "generic",
+        attachment: {
+          type: "template",
+          payload: {
+            template_type: "generic",
             elements,
           }
         }
