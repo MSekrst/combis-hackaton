@@ -73,19 +73,19 @@ function replyGeneric(recipientId, option = {
                         subtitle: "Pozdrav, probajte naredbe:\nponuda hrane\nponuda pića\nponuda filmova"
                       }) {
   const messageData = {
-    recipient : {
-      id : recipientId,
+    recipient: {
+      id: recipientId,
     },
-    message : {
-      "attachment" : {
-        "type" : "template",
-        "payload" : {
-          "template_type" : "generic",
-          "elements" : [
+    message: {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [
             {
-              "title" : option.title,
+              "title": option.title,
               // "image_url": "https://petersfancybrownhats.com/company_image.png",
-              "subtitle" : option.subtitle,
+              "subtitle": option.subtitle,
             }
           ]
         }
@@ -113,10 +113,10 @@ function replyWithPonudaTemplate(id, data) {
 
   if (elements.length) {
     callSendAPI({
-      recipient : {
-        id : id,
+      recipient: {
+        id: id,
       },
-      message : {
+      message: {
         attachment : {
           type : "template",
           payload : {

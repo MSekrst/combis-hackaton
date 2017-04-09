@@ -3,12 +3,12 @@ import styled from 'styled-components'
 import Link from 'next/link'
 
 const SidebarLeft = styled.div`
-  position: fixed;
   top: 0;
   left: 0;
   width: 145px;
   height: 100%;
   display: flex;
+  position: fixed;
   border-right: 1px solid rgba(0,0,0,.1);
   box-shadow: 0 0 5px -1px rgba(0,0,0,.3);
   background-color: whitesmoke;
@@ -19,6 +19,7 @@ const SidebarLeft = styled.div`
 
 const LogoWrapper = styled.div`
   height: 20%;
+  background: grey;
   border-bottom: 1px solid #d9d9d9;
   padding: 20px;
 `
@@ -29,7 +30,8 @@ const Logo = styled.img`
   margin: 0 auto;
 `
 
-const Item = styled.div`
+const Item = styled.a`
+  cursor: pointer;
   height: 20%;
   padding: 15px;
   display: flex;
@@ -47,37 +49,33 @@ const Text = styled.span`
   font-weight: 300;
 `
 
-const Sidebar = ({ handler }) => (
+const Sidebar = () => (
   <SidebarLeft>
     <LogoWrapper>
-      <Link prefetch href="/"><a href="/"><Logo src="/static/img/logo.png" /></a></Link>
+      <Link prefetch href="/"><a href="/"><Logo src="/static/img/logoNew.png" /></a></Link>
     </LogoWrapper>
-    <Item onClick={() => { handler('Pending') }}>
+    <Item href="#Pending" >
       <i className="material-icons">cached</i>
       <br />
-      <Text>name</Text>
+      <Text>Pending</Text>
     </Item>
-    <Item onClick={() => { handler('Completet') }}>
+    <Item href="#Completed">
       <i style={{ width: 25 }} className="material-icons">checked</i>
       <br />
-      <Text>name</Text>
+      <Text>Completed</Text>
     </Item>
-    <Item onClick={() => { handler('Complaint') }}>
+    <Item href="#Complaint">
       <i className="material-icons">mood_bad</i>
       <br />
-      <Text>name</Text>
+      <Text>Complaint</Text>
     </Item>
-    <Item onClick={() => { handler('Statistics') }}>
+    <Item href="#Statistics">
       <i className="material-icons">equalizer</i>
       <br />
-      <Text>name</Text>
+      <Text>Stats</Text>
     </Item>
-  </SidebarLeft>
+  </SidebarLeft >
 )
-
-Sidebar.propTypes = {
-  handler: PropTypes.func.isRequired,
-}
 
 export default Sidebar
 

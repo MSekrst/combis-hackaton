@@ -1,12 +1,20 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
+import withRedux from 'next-redux-wrapper'
+import { bindActionCreators } from 'redux'
+import { store } from '../../src/store'
 
 import Sidebar from '../../src/components/Sidebar'
-import List from '../../src/modules/Items/components/Items'
+import Pending from '../../src/modules/Items/components/Pending'
+import Stats from '../../src/modules/Items/components/Statistics'
+import Complaint from '../../src/modules/Items/components/Complaint'
+import Completed from '../../src/modules/Items/components/Completed'
+
+import { getItems, removePending } from '../../src/modules/Items/actions'
 
 const FullCover = styled.div`
   top: 0;
-  left: 200px;
+  left: 180px;
   position: absolute;
   height: 100vh;
   width: calc(100vw - 200px);
@@ -17,41 +25,31 @@ const ContentWrapper = styled(FullCover) `
 
 `
 
-export default class Items extends PureComponent {
-  constructor(props) {
-    super(props)
-
-    this.state = { active: 'Pending' }
-
-    this.sidebarChange = this.sidebarChange.bind(this)
-  }
+class Items extends PureComponent {
 
   componentDidMount() {
-    let active = 'Pending';
-
-    if (typeof window !== undefined) {
-      const hash = window.location.hash || '#Pending'
-      active = hash.substr(1, hash.length - 1)
-    }
-
-    this.setState({ ...this.state, active });
-  }
-
-  sidebarChange(active) {
-    this.setState({ ...this.state, active })
+    this.props.getItems()
   }
 
   render() {
     return (
       <div>
-        <Sidebar
-          handler={this.sidebarChange}
-        />
+        <Sidebar />
         <ContentWrapper>
-          {this.state.active === 'Statistics' ? <div>Stats</div> : <List />}
+          <Pending removePending={(id) => this.props.removePending(id)} items={this.props.items.filter(d => d.status === 'Pending')} />
+          <Completed items={this.props.items.filter(d => d.status !== 'Pending')} />
+          <Complaint />
+          <Stats />
         </ContentWrapper>
       </div>)
   }
 }
 
-
+export default withRedux(
+  () => store,
+  state => ({ items: state.items }),
+  dispatch => ({
+    getItems: bindActionCreators(getItems, dispatch),
+    removePending: bindActionCreators(removePending, dispatch),
+  }),
+)(Items)
