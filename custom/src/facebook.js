@@ -69,7 +69,7 @@ function replyMessage(recipientId, messageText) {
 }
 
 function replyGeneric(recipientId, option = {
-  title: 'Hotel bot',
+  title: 'Hotel custom',
   subtitle: "Pozdrav, zanima vas nešto od sljedećih stvari:"
 }) {
   const messageData = {
@@ -104,9 +104,15 @@ function replyWithPonudaTemplate(id, data) {
       image_url: i.picture,
       subtitle: i.opis,
       buttons: [{
+<<<<<<< HEAD:bot/src/facebook.js
         type: "postback",
         title: "Naruči",
         payload: id + "*" + i.id,
+=======
+          type: "postback",
+          title: "Naruči",
+          payload: i.id,
+>>>>>>> 33a9d5f73c0a5ecdc9c24db6aba4224f69ab208a:custom/src/facebook.js
       }]
     })
   })

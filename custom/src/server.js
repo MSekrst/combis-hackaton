@@ -24,6 +24,7 @@ const WitClient = new Wit({ accessToken: '42N7ZBK3H3HJIBL7FNHI6P6N6E4V6FQR' });
 
 const app = express()
 app.set('port', process.env.PORT || config.port || 8080)
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 /*
@@ -79,6 +80,8 @@ app.post('/', function (req, res) {
               replyGeneric(id);
             })
             .catch(console.error);
+        } else if (event.postback) {
+
         } else {
           console.log("Webhook received unknown event: ", event);
         }
@@ -100,7 +103,7 @@ function receivedMessage(event) {
 }
 
 app.listen(app.get('port'), () => {
-  console.log('Our bot is running on port', app.get('port'))
+  console.log('Our custom is running on port', app.get('port'))
 })
 
 app.use(router)
