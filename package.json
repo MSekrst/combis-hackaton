@@ -16,7 +16,8 @@
     "redux-logger": "^3.0.1",
     "redux-persist": "^4.6.0",
     "redux-thunk": "^2.2.0",
-    "styled-components": "^1.4.4"
+    "styled-components": "^1.4.4",
+    "victory": "^0.18.4"
   },
   "scripts": {
     "dev": "next",

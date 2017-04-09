@@ -27,8 +27,16 @@ const ContentWrapper = styled(FullCover) `
 
 class Items extends PureComponent {
 
+  state = {
+    data: null,
+  }
+
   componentDidMount() {
     this.props.getItems()
+
+    fetch('http://localhost:8080/stats/all')
+      .then(res => res.json())
+      .then(data => this.setState({ data }))
   }
 
   render() {
@@ -39,7 +47,7 @@ class Items extends PureComponent {
           <Pending removePending={(id) => this.props.removePending(id)} items={this.props.items.filter(d => d.status === 'Pending')} />
           <Completed items={this.props.items.filter(d => d.status !== 'Pending')} />
           <Complaint />
-          <Stats />
+          <Stats data={this.state.data} />
         </ContentWrapper>
       </div>)
   }
