@@ -6,7 +6,7 @@ export const ERROR_GETTING_LIST = 'ERROR_GETTING_LIST'
 
 export function getItems() {
   return (dispatch) => {
-    fetch('/setAll')
+    fetch('http://localhost:8080/all')
       .then(res => res.json())
       .then((data) => {
         dispatch({
@@ -18,3 +18,14 @@ export function getItems() {
       }))
   }
 }
+
+export function removePending(_id) {
+  return (dispatch) => {
+    fetch('http://localhost:8080/status', {
+      method: 'POST',
+      body: JSON.stringify({ _id, status: 'Finished' }),
+    })
+    dispatch(getItems())
+  }
+}
+

@@ -69,23 +69,23 @@ function replyMessage(recipientId, messageText) {
 }
 
 function replyGeneric(recipientId, option = {
-                        title: 'Hotel bot',
-                        subtitle: "Pozdrav, zanima vas nešto od sljedećih stvari:"
-                      }) {
+  title: 'Hotel bot',
+  subtitle: "Pozdrav, zanima vas nešto od sljedećih stvari:"
+}) {
   const messageData = {
-    recipient : {
-      id : recipientId,
+    recipient: {
+      id: recipientId,
     },
-    message : {
-      "attachment" : {
-        "type" : "template",
-        "payload" : {
-          "template_type" : "generic",
-          "elements" : [
+    message: {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [
             {
-              "title" : option.title,
+              "title": option.title,
               // "image_url": "https://petersfancybrownhats.com/company_image.png",
-              "subtitle" : option.subtitle,
+              "subtitle": option.subtitle,
             }
           ]
         }
@@ -104,18 +104,18 @@ function replyWithPonudaTemplate(id, data) {
       image_url: i.picture,
       subtitle: i.opis,
       buttons: [{
-          type: "postback",
-          title: "Naruči",
-          payload: id + "*" + i.id,
+        type: "postback",
+        title: "Naruči",
+        payload: id + "*" + i.id,
       }]
     })
   })
 
   callSendAPI({
-    recipient : {
-      id : id,
+    recipient: {
+      id: id,
     },
-    message : {
+    message: {
       attachment: {
         type: "template",
         payload: {

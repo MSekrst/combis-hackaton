@@ -19,6 +19,7 @@ const SidebarLeft = styled.div`
 
 const LogoWrapper = styled.div`
   height: 20%;
+  background: grey;
   border-bottom: 1px solid #d9d9d9;
   padding: 20px;
 `
@@ -58,10 +59,10 @@ const Sidebar = () => (
       <br />
       <Text>Pending</Text>
     </Item>
-    <Item href="#Completet">
+    <Item href="#Completed">
       <i style={{ width: 25 }} className="material-icons">checked</i>
       <br />
-      <Text>Completet</Text>
+      <Text>Completed</Text>
     </Item>
     <Item href="#Complaint">
       <i className="material-icons">mood_bad</i>
@@ -75,10 +76,6 @@ const Sidebar = () => (
     </Item>
   </SidebarLeft >
 )
-
-Sidebar.propTypes = {
-  handler: PropTypes.func.isRequired,
-}
 
 export default Sidebar
 

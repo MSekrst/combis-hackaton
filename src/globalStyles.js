@@ -10,7 +10,7 @@ injectGlobal`
   body, html{
     height: 100%;
     margin: 0;
-    background: white;
+    background: whitesmoke;
     font-family: 'PT Sans', sans-serif;
   }
   
